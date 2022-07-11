@@ -54,7 +54,6 @@ const ProductProvider = ({ children }) => {
         setLoading(false);
     }
   };
-// make the wishlist true
 
   const toggleWishList = (id) => {
     const newProducts = products.map((product) => {
@@ -69,6 +68,20 @@ const ProductProvider = ({ children }) => {
     });
     setProducts(newProducts); 
   }
+//filter products bt rating and price
+
+  const filterProducts = (rating, price) => {
+    const newProducts = products.filter((product) => {
+      if (product.rating.rate >= rating && product.price <= price) {
+        return product;
+      } else {
+        return null;
+      }
+    });
+    setProducts(newProducts);
+  }
+  
+
   const value = {
     products,
     fetchProducts,
@@ -78,7 +91,8 @@ const ProductProvider = ({ children }) => {
     loading,
     setProducts,
     setLoading,
-    toggleWishList
+    toggleWishList,
+    filterProducts,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
