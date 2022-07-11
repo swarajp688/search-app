@@ -7,19 +7,21 @@ const SearchResults = () => {
   const context = useProductContext();
   const { products } = context;
   return (
-    <div>
-      {context.loading ? <Loader /> :
-        <section>
-        {/* {products.map((product) => {
-          return <ProductCard key={product.id} product={product} />
-        }} */}
+    <>
+    <h2>Search Results</h2>
+    <div className='display-product'>
+      {context.loading ? <Loader /> :<>
+        <section className='products-list'>
         {products?.map((product) => {
           return <ProductCard loading={context.loading} key={product.id} product={product} />
           })}
-        <FilterResult />
+        
         </section>
+        <FilterResult />
+        </>
 }
     </div>
+    </>
   )
 }
 
