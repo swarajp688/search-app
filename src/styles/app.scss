@@ -1,6 +1,8 @@
 @use './navbar.scss';
 @use './searchBar.scss';
 @use './suggestionBox.scss';
+@use "./searchResults.scss";
+@use "./loader.scss";
 .btn{
     color: red;
 }

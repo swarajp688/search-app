@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import useProductContext from "../../hooks/useProductContext";
+import Loader from "../Loader/Loader";
 const LatestTrends = () => {
   const context = useProductContext();
   const { trendProducts } = context;
@@ -12,6 +13,7 @@ const LatestTrends = () => {
   return (
     <div className="latest-trend">
       <h4>Latest Trends</h4>
+      {context.loading ? <Loader /> : 
       <div className="trend-container">
 
         {trendProducts.map((product) => {
@@ -23,6 +25,7 @@ const LatestTrends = () => {
           </div>
         })}
       </div>
+}
     </div>
   );
 };

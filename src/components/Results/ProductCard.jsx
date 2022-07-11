@@ -1,8 +1,18 @@
 import React from 'react'
-
-const ProductCard = () => {
+import Rating from './Rating';
+import Loader from '../Loader/Loader';
+const ProductCard = ({product,loading}) => {
+  
+  console.log(product,'product');
+  if(loading){
+    return <Loader />
+  }
   return (
-    <div>ProductCard</div>
+
+    <div>
+      
+      <Rating rating={product.rating} />
+    </div>
   )
 }
 
