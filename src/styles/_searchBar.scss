@@ -5,13 +5,55 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-group{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
     .search-bar{
-        width: 40%;
-        height: 30px;
-        padding: 10px;
+        width: 80%;
+        height: 100%;
+        padding: 5px;
         font-size: 1.1rem;
-        border-radius: 20px;
+
         border: none;
-        border: 1px solid black;
+        outline: none;
     }
+    
+}
+
+/* Style the submit button */
+.form-group button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  height: 100%;
+  color: black;
+  font-size: 17px;
+  background: none;
+border:none;
+/* Prevent double borders */
+  cursor: pointer;
+  
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }

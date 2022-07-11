@@ -1,25 +1,27 @@
 import {  useState } from "react";
 import SuggestionBox from "./suggestion/SuggestionBox";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 const SearchBar = ({ inputRef,setShowResult,showResult }) => {
   const [val, setVal] = useState(" ");
   const [suggestions, setSuggestions] = useState(false);
   const handleChange = (e) => {
     setVal(e.target.value);
-    if(e.target.value.length > 0) { 
-      setShowResult(true);
-      setSuggestions(false)
-    } else {
-      setShowResult(false);
-      setSuggestions(true);
-    }
   }
   const handleClick=()=>{
     inputRef.current.focus();
     setSuggestions(true)
   }
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    setShowResult(true);
+    setSuggestions(false);
+  }
   return (
     <div className="search-wrapper">
-      <input
+      <form class="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+        <input
         onClick={handleClick}
         value={val}
         onChange={handleChange}
@@ -28,7 +30,12 @@ const SearchBar = ({ inputRef,setShowResult,showResult }) => {
         type="text"
         placeholder="Search"
       />
-      {document.activeElement === inputRef.current && suggestions  &&(
+      <button type="submit"><FontAwesomeIcon icon={faSearch} /></button>
+        </div>
+      
+    </form>
+      
+      {suggestions && !showResult  &&(
         <SuggestionBox />
       )}
     </div>

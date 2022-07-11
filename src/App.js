@@ -1,4 +1,4 @@
-import { useRef, useState,useContext } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/Results/SearchResults';
@@ -7,8 +7,11 @@ import useProductContext from './hooks/useProductContext';
 function App() {
   const [showResult,setShowResult] = useState(false);
   const inputRef = useRef(null);
-  const cont = useProductContext();
-  console.log(cont.products)
+  const context = useProductContext();
+  useEffect(()=>{
+    context.fetchProducts();
+  },[])
+
   return (
     <div className="App">
       <Navbar />

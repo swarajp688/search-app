@@ -1,15 +1,30 @@
-import React from 'react'
-
+import React, { useEffect, useRef } from "react";
+import useProductContext from "../../hooks/useProductContext";
 const LatestTrends = () => {
-    fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+  const context = useProductContext();
+  const { trendProducts } = context;
+  const searchref = useRef(null);
+  useEffect(() => {
+    context.fetchTrend();
+    console.log(context.trendProducts,'contect');
+  }, []);
+
   return (
-    <div>
-        <h4>Latest Trends</h4>
+    <div className="latest-trend">
+      <h4>Latest Trends</h4>
+      <div className="trend-container">
 
+        {trendProducts.map((product) => {
+          return <div key={product.id} className="productBox">
+            <img src={product.image} alt={product.title} />
+            <p ref={searchref}>
+            {product.category}
+            </p>
+          </div>
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LatestTrends
+export default LatestTrends;

@@ -2,7 +2,7 @@ import React from 'react'
 
 const PopularSuggestions = () => {
   return (
-    <div>
+    <div className='popular-suggestion'>
         <h4>Popular suggestions</h4>
         <p className='popular'>
         DANVOUY Womens T Shirt Casual Cotton Short

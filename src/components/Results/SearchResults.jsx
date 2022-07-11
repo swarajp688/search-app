@@ -6,8 +6,9 @@ const SearchResults = () => {
     <div>
         <section>
         <ProductCard />
-        </section>
+        
         <FilterResult />
+        </section>
     </div>
   )
 }
