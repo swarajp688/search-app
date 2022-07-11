@@ -1,0 +1,17 @@
+.search-wrapper{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .search-bar{
+        width: 40%;
+        height: 30px;
+        padding: 10px;
+        font-size: 1.1rem;
+        border-radius: 20px;
+        border: none;
+        border: 1px solid black;
+    }
+}
