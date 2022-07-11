@@ -1,7 +1,6 @@
 import { createContext ,useState} from "react";
 
 const ProductContext = createContext();
-
 const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const fetchProducts = async () => {
@@ -9,7 +8,6 @@ const ProductProvider = ({ children }) => {
         const data = await response.json();
         setProducts(data);
     }
-
     const value = {
         products,
     };

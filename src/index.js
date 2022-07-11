@@ -9,10 +9,8 @@ root.render(
 
 
   <ProductProvider>
-
-    
         <App />
-        </ProductProvider>
+  </ProductProvider>
   </React.StrictMode>
 );
 
