@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <SearchBar setShowResult={setShowResult} inputRef={inputRef} />
+      <SearchBar showResult={showResult} setShowResult={setShowResult} inputRef={inputRef} />
       {showResult && <SearchResults />}
     </div>
   );

@@ -1,14 +1,26 @@
 import {  useState } from "react";
 import SuggestionBox from "./suggestion/SuggestionBox";
-const SearchBar = ({ inputRef,setShowResult }) => {
-  const [val, setVal] = useState("");
+const SearchBar = ({ inputRef,setShowResult,showResult }) => {
+  const [val, setVal] = useState(" ");
+  const [suggestions, setSuggestions] = useState(false);
   const handleChange = (e) => {
     setVal(e.target.value);
-    if(val.length) setShowResult(true);
+    if(e.target.value.length > 0) { 
+      setShowResult(true);
+      setSuggestions(false)
+    } else {
+      setShowResult(false);
+      setSuggestions(true);
+    }
+  }
+  const handleClick=()=>{
+    inputRef.current.focus();
+    setSuggestions(true)
   }
   return (
     <div className="search-wrapper">
       <input
+        onClick={handleClick}
         value={val}
         onChange={handleChange}
         ref={inputRef}
@@ -16,7 +28,7 @@ const SearchBar = ({ inputRef,setShowResult }) => {
         type="text"
         placeholder="Search"
       />
-      {document.activeElement === inputRef.current && val.length <= 0 && (
+      {document.activeElement === inputRef.current && suggestions  &&(
         <SuggestionBox />
       )}
     </div>
