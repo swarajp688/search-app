@@ -14,7 +14,13 @@ const ProductProvider = ({ children }) => {
       setLoading(true);
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
-      setProducts(data);
+      const newData = data.map((item)=>{
+        return {
+          ...item,
+          wishList: false,
+        }
+      })
+      setProducts(newData);
     } catch (error) {
       setError({
         err: true,
@@ -48,7 +54,21 @@ const ProductProvider = ({ children }) => {
         setLoading(false);
     }
   };
+// make the wishlist true
 
+  const toggleWishList = (id) => {
+    const newProducts = products.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          wishList: !product.wishList,
+        };
+      } else {
+        return product;
+      }
+    });
+    setProducts(newProducts); 
+  }
   const value = {
     products,
     fetchProducts,
@@ -56,6 +76,9 @@ const ProductProvider = ({ children }) => {
     fetchTrend,
     error,
     loading,
+    setProducts,
+    setLoading,
+    toggleWishList
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
