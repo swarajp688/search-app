@@ -4,3 +4,5 @@ open terminal
 - cd search-app
 - npm install
 - npm start 
+
+live site :- https://cerulean-platypus-d223dc.netlify.app/
