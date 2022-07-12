@@ -1,48 +1,47 @@
-import {  useState } from "react";
+import { useState } from "react";
 import SuggestionBox from "./suggestion/SuggestionBox";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import useProductContext from "../hooks/useProductContext";
-const SearchBar = ({ inputRef,setShowResult,showResult }) => {
+const SearchBar = ({ inputRef, setShowResult, showResult }) => {
   const context = useProductContext();
   const [val, setVal] = useState(" ");
   const [suggestions, setSuggestions] = useState(false);
-  const handleChange = (e) => {
+  const handleChange = async(e) => {
     setVal(e.target.value);
-  }
-  const handleClick=()=>{
+    await context.searchProducts(val);
+  };
+  const handleClick = async () => {
     inputRef.current.focus();
-    setSuggestions(true)
-  }
-  const handleSubmit=async(e)=>{
+    setSuggestions(true);
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(val.length< 1){
-      await context.fetchProducts();
-    }
+    await context.searchProducts(val);
     setShowResult(true);
     setSuggestions(false);
-  }
+    setVal("");
+  };
   return (
     <div className="search-wrapper">
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-        <input
-        onClick={handleClick}
-        value={val}
-        onChange={handleChange}
-        ref={inputRef}
-        className="search-bar"
-        type="text"
-        placeholder="Search"
-      />
-      <button type="submit"><FontAwesomeIcon icon={faSearch} /></button>
+          <input
+            onClick={handleClick}
+            value={val}
+            onChange={handleChange}
+            ref={inputRef}
+            className="search-bar"
+            type="text"
+            placeholder="Search"
+          />
+          <button type="submit">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
         </div>
-      
-    </form>
-      
-      {suggestions && !showResult  &&(
-        <SuggestionBox />
-      )}
+      </form>
+
+      {suggestions && !showResult && <SuggestionBox />}
     </div>
   );
 };

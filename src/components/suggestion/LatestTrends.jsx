@@ -7,7 +7,6 @@ const LatestTrends = () => {
   const searchref = useRef(null);
   useEffect(() => {
     context.fetchTrend();
-
   }, []);
 
   return (

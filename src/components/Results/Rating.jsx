@@ -1,5 +1,4 @@
 
-import React, { useState } from 'react';
 import ReactStars from "react-rating-stars-component";
 const Rating = ({ rating }) => {
     //make rating heart icon

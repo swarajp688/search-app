@@ -14,13 +14,15 @@ const ProductProvider = ({ children }) => {
       setLoading(true);
       const response = await fetch("https://fakestoreapi.com/products");
       const data = await response.json();
-      const newData = data.map((item)=>{
+      const newData = data.map((item) => {
         return {
           ...item,
           wishList: false,
-        }
-      })
+        };
+      });
       setProducts(newData);
+      localStorage.removeItem("products");
+      localStorage.setItem('products', JSON.stringify(newData));
     } catch (error) {
       setError({
         err: true,
@@ -46,12 +48,12 @@ const ProductProvider = ({ children }) => {
         })
       );
     } catch (err) {
-        setError({
-            err: true,
-            msg: err,
-        });
+      setError({
+        err: true,
+        msg: err,
+      });
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -66,21 +68,73 @@ const ProductProvider = ({ children }) => {
         return product;
       }
     });
-    setProducts(newProducts); 
-  }
-//filter products bt rating and price
-
-  const filterProducts = (rating, price) => {
-    const newProducts = products.filter((product) => {
-      if (product.rating.rate >= rating && product.price <= price) {
+    setProducts(newProducts);
+  };
+  const filter = (rating, price) => {
+    const prod =JSON.parse(localStorage.getItem('products'));
+    console.log(prod,'prod');
+    const newProducts = prod.filter((product) => {
+      if (rating === null && price === null) {
         return product;
-      } else {
-        return null;
       }
+      if (rating !== null && price === null) {
+        if (product.rating.rate >= rating) {
+          return product;
+        } else {
+          return null;
+        }
+      }
+      if (rating === null && price !== null) {
+        if (price === 500) {
+          if (product.price >= 500) {
+            return product;
+          } else {
+            return null;
+          }
+        } else if (price === 3000) {
+          if (product.price >= 3000) {
+            return product;
+          } else {
+            return null;
+          }
+        }
+      }
+      if (rating !== null && price !== null) {
+        if(price === 500){
+          if(product.price <= 500 && product.rating.rate >= rating){
+            return product;
+          }else{
+            return null;
+          }
+        }else if(price === 3000){
+          if(product.price <= 3000 && product.price >= 500 && product.rating.rate >= rating){
+            return product;
+          }else{
+            return null;
+          }
+        }
+      }
+      return null;
     });
     setProducts(newProducts);
-  }
-  
+  };
+
+
+  // make seach for products
+  const searchProducts = async (search) => {
+    setLoading(true);
+    const newProducts = products.filter((product) => {
+      if(search === '' || search === null || search === ""){
+        return product;
+      }
+      if (product.category.toLowerCase().includes(search.toLowerCase())) {
+        return product;
+      }
+      return null;
+    });
+    setProducts(newProducts);
+    setLoading(false);
+  };
 
   const value = {
     products,
@@ -92,7 +146,8 @@ const ProductProvider = ({ children }) => {
     setProducts,
     setLoading,
     toggleWishList,
-    filterProducts,
+    searchProducts,
+    filter,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
