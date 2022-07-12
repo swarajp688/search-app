@@ -13,8 +13,9 @@
 }
 .filter-item-content-item{
     display: flex;
-    
+    flex-wrap: wrap;
     input{
         cursor: pointer;
     }
+    
 }

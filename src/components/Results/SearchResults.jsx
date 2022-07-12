@@ -19,7 +19,7 @@ const SearchResults = () => {
         {products?.map((product) => {
           return <ProductCard loading={context.loading} key={product.id} product={product} />
           })}
-        
+        {products?.length === 0 && <h3>No products found</h3>}
         </section>
         <Filter />
         </>

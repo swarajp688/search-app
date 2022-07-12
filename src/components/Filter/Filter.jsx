@@ -42,6 +42,7 @@ const Filter = () => {
                 onClick={handlePriceChange}
               />
               <label htmlFor="price-1">Rs. 0 - Rs. 500</label>
+              <div></div>
               <input
                 name="price"
                 type="radio"

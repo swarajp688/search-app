@@ -5,19 +5,16 @@ const PopularSuggestions = () => {
     <div className='popular-suggestion'>
         <h4>Popular suggestions</h4>
         <p className='popular'>
-        DANVOUY Womens T Shirt Casual Cotton Short
+        men's clothing
         </p>
         <p className='popular'>
-        White Gold Plated Princess
+        jewelery
         </p>
         <p className='popular'>
-        Mens Cotton Jacket
+        women's clothing
         </p>
         <p className='popular'>
-        Mens Casual Slim Fit
-        </p>
-        <p className='popular'>
-        Rain Jacket
+        electronics
         </p>
     </div>
   )

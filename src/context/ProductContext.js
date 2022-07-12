@@ -72,7 +72,7 @@ const ProductProvider = ({ children }) => {
   };
   const filter = (rating, price) => {
     const prod =JSON.parse(localStorage.getItem('products'));
-    console.log(prod,'prod');
+
     const newProducts = prod.filter((product) => {
       if (rating === null && price === null) {
         return product;
@@ -86,13 +86,13 @@ const ProductProvider = ({ children }) => {
       }
       if (rating === null && price !== null) {
         if (price === 500) {
-          if (product.price >= 500) {
+          if (product.price <= 500) {
             return product;
           } else {
             return null;
           }
         } else if (price === 3000) {
-          if (product.price >= 3000) {
+          if (product.price >= 500 && product.price <= 3000) {
             return product;
           } else {
             return null;
@@ -121,7 +121,7 @@ const ProductProvider = ({ children }) => {
 
 
   // make seach for products
-  const searchProducts = async (search) => {
+  const searchProducts =  (search) => {
     setLoading(true);
     const newProducts = products.filter((product) => {
       if(search === '' || search === null || search === ""){
