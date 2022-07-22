@@ -7,8 +7,8 @@ const SuggestionBox = () => {
     <div className="suggestion-box">
         <LatestTrends />
         <PopularSuggestions />
+        <p>* Click on search to view all products </p>
     </div>
   )
 }
-
 export default SuggestionBox
